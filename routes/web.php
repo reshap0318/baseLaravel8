@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\{
     HomeController,
     Management\RoleController,
-    Management\UserController
+    Management\UserController,
+    Management\categoryApplicationController
 };
 
 Route::get('/', function () {
@@ -16,7 +17,7 @@ Auth::routes(['verify'=>true]);
 
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/home', [HomeController::class, 'index'])->name('home.dashboard');
 
     Route::group(['prefix' => 'role'], function () {
         Route::get('', [RoleController::class, 'index'])->name('roles.index');
@@ -36,5 +37,15 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
         Route::patch('/edit/{id}', [UserController::class, 'update'])->name('users.update');
         Route::delete('/delete/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+    });
+
+    Route::group(['prefix' => 'category-application'], function () {
+        Route::get('', [categoryApplicationController::class, 'index'])->name('category-application.index');
+        Route::get('/datas', [categoryApplicationController::class, 'datas']);
+        Route::get('/create', [categoryApplicationController::class, 'create'])->name('category-application.create');
+        Route::post('/create', [categoryApplicationController::class, 'store'])->name('category-application.store');
+        Route::get('/edit/{id}', [categoryApplicationController::class, 'edit'])->name('category-application.edit');
+        Route::patch('/edit/{id}', [categoryApplicationController::class, 'update'])->name('category-application.update');
+        Route::delete('/delete/{id}', [categoryApplicationController::class, 'destroy'])->name('category-application.destroy');
     });
 });
