@@ -3,43 +3,25 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
-    <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-{{-- begin::css --}}
-    <!--begin::Fonts-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 
-    <!--end::Fonts-->
     <link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
-
-    <!--begin::Global Theme Styles(used by all pages)-->
     <link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/plugins/custom/prismjs/prismjs.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
-
-    <!--end::Global Theme Styles-->
-
-    <!--begin::Layout Themes(used by all pages)-->
-
-    <!--end::Layout Themes-->
+    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" /> --}}
+    
     <link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.ico') }}" />
+    
 {{-- end::css --}}
 </head>
 <body id="kt_body" style="background-image: url({{ asset('assets/media/bg/bg-10.jpg') }})" class="quick-panel-right demo-panel-right offcanvas-right header-fixed page-loading">
 
-    @include('layouts.metronic.layout')
-
-    @include('partials._extras.offcanvas.quick-user')
-
-    @include('partials._extras.offcanvas.quick-panel')
-
-    @include('partials._extras.chat')
-
-    @include('partials._extras.scrolltop')
+    @inertia
 
     <!--begin::Global Config(global config for global JS scripts)-->
     <script>
@@ -101,18 +83,12 @@
             },
             "font-family": "Poppins"
         };
-        var base_url = "{{ url('/') }}";
     </script>
-
-    <!--end::Global Config-->
-
-    <!--begin::Global Theme Bundle(used by all pages)-->
+    
     <script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
     <script src="{{ asset('assets/plugins/custom/prismjs/prismjs.bundle.js') }}"></script>
     <script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
-
-    <!--end::Global Theme Bundle-->
-    @yield('vendor-js')
+    <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
     <script>
         toastr.options = {
             "closeButton": true,
@@ -132,20 +108,6 @@
             "hideMethod": "fadeOut"
         };
     </script>
-    @if (session('resent'))
-        <script>
-            toastr.info("A fresh verification link has been sent to your email address.", "email sent");
-        </script>
-    @endif
-    <script>
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-    </script>
-    @yield('js')
-
-    <!--end::Page Scripts-->
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

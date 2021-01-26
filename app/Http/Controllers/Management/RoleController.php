@@ -6,12 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\role;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 class RoleController extends Controller
 {
     public function index()
     {
-        return view('backend.role.index');
+        return Inertia::render('roles/index');
     }
 
     public function create()
