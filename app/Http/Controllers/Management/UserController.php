@@ -4,22 +4,10 @@ namespace App\Http\Controllers\Management;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\{role, User};
-use Illuminate\Support\Facades\Auth;
+use App\Models\{User};
 
 class UserController extends Controller
 {
-    public function index()
-    {
-        return view('backend.users.index');
-    }
-
-    public function create()
-    {
-        $roles = role::get()->pluck('name','id');
-        return view('backend.users.create',compact('roles'));
-    }
-
     public function store(Request $request)
     {
         $request->validate([
@@ -36,13 +24,6 @@ class UserController extends Controller
         $user->save();
         $user->roles()->sync($request->roles);
         return redirect()->route('users.index');
-    }
-
-    public function edit($id)
-    {
-        $user = User::find($id);
-        $roles = role::get()->pluck('name','id');
-        return view('backend.users.edit',compact('roles','user'));
     }
 
     public function update($id, Request $request)

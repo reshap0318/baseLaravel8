@@ -27,6 +27,7 @@
 
     <!--end::Layout Themes-->
     <link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.ico') }}" />
+    @livewireStyles
 {{-- end::css --}}
 </head>
 <body id="kt_body" style="background-image: url({{ asset('assets/media/bg/bg-10.jpg') }})" class="quick-panel-right demo-panel-right offcanvas-right header-fixed page-loading">
@@ -101,7 +102,6 @@
             },
             "font-family": "Poppins"
         };
-        var base_url = "{{ url('/') }}";
     </script>
 
     <!--end::Global Config-->
@@ -131,19 +131,21 @@
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut"
         };
-    </script>
-    @if (session('resent'))
-        <script>
-            toastr.info("A fresh verification link has been sent to your email address.", "email sent");
-        </script>
-    @endif
-    <script>
+        var base_url = "{{ url('/') }}";
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
     </script>
+    @if (session('resent'))
+        <script>
+            toastr.info("A fresh verification link has been sent to your email address.", "email sent");
+        </script>
+    @endif
+    <script src="{{ asset('livewire/livewire.js') }}"></script>
+    @livewireScripts
+    
     @yield('js')
 
     <!--end::Page Scripts-->

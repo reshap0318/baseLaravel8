@@ -36,7 +36,7 @@
                             </div>
                         @endif
 
-                        @yield('content')
+                        {{ $slot }}
                     </div>
 
                     <!--end::Container-->
